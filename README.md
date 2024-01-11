@@ -1,3 +1,43 @@
+# How to setup
+
+NodeJS version: 18.17.1
+Package Manager: NPM
+
+After clone this repository, simply run
+```sh
+cp .env.example .env
+npm install
+npm run dev
+```
+
+Access application local to http://localhost:5174
+You can also access live version here https://rolling-glory-delta.vercel.app/
+
+
+# Why VueJS
+ Vue.js offers higher performance speed, and many programmers say it is easier to learn than React.js. Its multiple customization features are also a factor that draws developers to Vue.js.
+
+ Community: For the community, yes react has biggest community but vue also has great community
+
+ Syntax: Vue is easy to use, has clean code. Vue JS use template based on HTML and react use JSX as template engine
+
+ Performance: Vue has better performance than react, by default vue only re-render element change not like react change entire element. So much faster than react
+ You can check the benchmark comparison Javascript framework here
+ https://krausest.github.io/js-framework-benchmark/2023/table_chrome_120.0.6099.62.html
+
+ State Management: Vue has powerful state management and can be easyly to use. React state management depends on third party like redux, zustand. react builtin state management itself is hard to use for complex state
+
+
+ Ecosystem: Both Vue and React has many plugin, and UI library to help fast and better development
+
+# SEO
+Use current product name, description, image for title, meta description and meta og:image
+
+
+Note: 
+Currently the API for wishlist not working, after hit endpoint to /https://recruitment.dev.rollingglory.com/api/v2/gifts/18/wishlist with POST method, key `isWishlist` on data product still has `0` value
+So, currently I only use localStorage to store wishlish product
+
 # rolling-glory
 
 This template should help get you started developing with Vue 3 in Vite.
