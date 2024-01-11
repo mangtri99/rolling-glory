@@ -14,7 +14,7 @@ const emit = defineEmits(['click'])
   <button
     @click="$emit('click', $event)"
     :class="[
-      isLiked ? 'bg-red-600 border border-red-600' : 'bg-white border border-[#E1E1E1]',
+      isLiked ? 'bg-red-600 border border-red-600' : ' border border-[#E1E1E1]',
       twMerge(
         ' hover:bg-red-600 px-4 py-2 lg:px-6 lg:py-3 rounded-3xl shadow-sm flex items-center transition-all group',
         classes

@@ -6,6 +6,8 @@ import DotIcon from '@/assets/dot.svg'
 import ButtonLike from './ButtonLike.vue'
 import StarRating from './StarRating.vue'
 import { useWishlistStore } from '@/stores/useWishlist'
+import { stockStatus } from '@/utils/stockStatus'
+import { RouterLink } from 'vue-router'
 interface Props {
   product: Attributes
 }
@@ -17,6 +19,20 @@ const wishlistStore = useWishlistStore()
 <template>
   <div class="border border-secondary-200 rounded-lg py-4 px-2 lg:py-6 lg:px-4 relative h-full">
     <div v-if="product.stock === 0" class="z-10 absolute inset-0 bg-secondary-50/75" />
+    <div class="z-10 absolute inset-0 hover:bg-gradient-to-b from-primary to-[#649C1A] hover:opacity-95 transition-all duration-300 group">
+      <div class="group-hover:block hidden h-full">
+        <div class="flex flex-col h-full text-white py-4 px-2 lg:py-6 lg:px-4 relative w-full">
+          <p class="w-full text-sm text-white absolute left-4 top-4">{{ stockStatus(product.stock) }}</p>
+          <p class="w-full text-center text-base text-white absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">{{ product.name }}</p>
+          <div class="absolute left-1/2 -translate-x-1/2 bottom-[20%] px-4 w-full">
+            <router-link :to="`/detail/${product.id}`" class=" py-2 border border-white hover:bg-white/10 rounded-3xl w-full flex items-center space-x-2 justify-center">
+              <span class="i-mdi-visibility"></span>
+              <span class="text-xs text-white">View Detail</span>
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </div> 
     <div class="absolute right-0 top-0 rounded-lg translate-x-[6px] -translate-y-[6px]">
       <BadgeProduct :product="product" />
     </div>

@@ -11,9 +11,12 @@ import StockStatus from '@/components/StockStatus.vue'
 import { Head } from '@unhead/vue/components'
 import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import StarRating from '@/components/StarRating.vue'
+import { useWishlistStore } from '@/stores/useWishlist'
 
 const route = useRoute()
 const product = ref<ProductDetail>()
+const counter = ref(1)
+const wishlistStore = useWishlistStore()
 
 onMounted(async () => {
   try {
@@ -58,8 +61,7 @@ function descriptionList(description: string, extraSpace = false) {
     <meta name="og:image" content="{{ product.value?.data.attributes.images[0] }}" />
     <meta name="og:url" content="{{ window.location.href }}" />
   </Head>
-  <div class="" v-if="!product?.data">No Product</div>
-  <div v-else>
+  <div v-if="product && product.data">
     <div class="container px-4 lg:px-16">
       <div>
         <Breadcrumbs
@@ -118,13 +120,15 @@ function descriptionList(description: string, extraSpace = false) {
                   <p class="text-sm text-secondary mb-4">Jumlah</p>
                   <div class="flex items-center">
                     <button
+                      @click="counter--"
                       type="button"
                       class="px-3 py-2 flex items-center bg-secondary-100 hover:bg-secondary-100/90 shadow-sm rounded-sm"
                     >
                       <span class="i-mdi-minus"></span>
                     </button>
-                    <p class="px-3 py-2">12</p>
+                    <p class="px-3 py-2">{{ counter }}</p>
                     <button
+                      @click="counter++"
                       type="button"
                       class="px-3 py-2 flex items-center bg-secondary-100 hover:bg-secondary-100/90 shadow-sm rounded-sm"
                     >
@@ -135,7 +139,15 @@ function descriptionList(description: string, extraSpace = false) {
                 <!-- Button -->
                 <div class="flex items-center lg:space-x-4 space-x-2">
                   <!-- Button Like -->
-                  <ButtonLike :is-liked="false" />
+                  <ButtonLike
+                    @click="
+                      (e) => {
+                        wishlistStore.toggleWishlist(Number(product?.data.id))
+                        e.preventDefault()
+                      }
+                    "
+                    :isLiked="wishlistStore.isWishlist(Number(product.data.id))"
+                  />
                   <button
                     class="text-sm bg-primary-500 text-white hover:text-primary-500 hover:bg-white border border-primary-500 px-4 py-2 lg:px-6 lg:py-3 rounded-3xl shadow-sm flex items-center transition-all"
                   >
@@ -175,5 +187,8 @@ function descriptionList(description: string, extraSpace = false) {
         </div>
       </div>
     </div>
+  </div>
+  <div class="my-4 w-full" v-else>
+    <p class="text-center text-xl text-gray-950">No Product Found!</p>
   </div>
 </template>
