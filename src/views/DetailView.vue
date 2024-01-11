@@ -58,7 +58,7 @@ function descriptionList(description: string, extraSpace = false) {
       name="og:description"
       content="{{ product.value?.data.attributes.description ?? 'Product Description' }}"
     />
-    <meta name="og:image" content="{{ product.value?.data.attributes.images[0] }}" />
+    <meta name="og:image" content="{{ product.value?.data.attributes.images[0] ?? 'https://rollingglory.com/images/meta_description.png' }}" />
     <meta name="og:url" content="{{ window.location.href }}" />
   </Head>
   <div v-if="product && product.data">
