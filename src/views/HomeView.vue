@@ -6,9 +6,56 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { Head } from '@unhead/vue/components'
 import SimplePagination from '@/components/SimplePagination.vue'
+import { useHead } from '@unhead/vue'
 
 const route = useRoute()
 const router = useRouter()
+
+// <Head>
+//     <title>Rolling Glory - Product List</title>
+//     <meta
+//       name="description"
+//       content="Discover the latest smartphone models and find the perfect device for your needs at our online store."
+//     />
+//     <meta name="keywords" content="Smartphone, Mobile Phones, Android, iPhone, Mobile Devices" />
+//     <meta name="og:title" content="Rolling Glory - Product List" />
+//     <meta
+//       name="og:description"
+//       content="Discover the latest smartphone models and find the perfect device for your needs at our online store."
+//     />
+//     <meta name="og:image" content="https://rollingglory.com/images/meta_description.png" />
+//     <meta name="og:url" content="{{ window.location.href }}" />
+//   </Head>
+
+useHead({
+  title: 'Rolling Glory - Product List',
+  meta: [
+    {
+      name: 'description',
+      content: 'Discover the latest smartphone models and find the perfect device for your needs at our online store.'
+    },
+    {
+      name: 'keywords',
+      content: 'Smartphone, Mobile Phones, Android, iPhone, Mobile Devices'
+    },
+    {
+      name: 'og:title',
+      content: 'Rolling Glory - Product List'
+    },
+    {
+      name: 'og:description',
+      content: 'Discover the latest smartphone models and find the perfect device for your needs at our online store.'
+    },
+    {
+      name: 'og:image',
+      content: 'https://rollingglory.com/images/meta_description.png'
+    },
+    {
+      name: 'og:url',
+      content: window.location.href
+    }
+  ]
+})
 
 const optionSort = ref([
   {
@@ -132,21 +179,7 @@ function paginated(action: string) {
 </script>
 
 <template>
-  <Head>
-    <title>Rolling Glory - Product List</title>
-    <meta
-      name="description"
-      content="Discover the latest smartphone models and find the perfect device for your needs at our online store."
-    />
-    <meta name="keywords" content="Smartphone, Mobile Phones, Android, iPhone, Mobile Devices" />
-    <meta name="og:title" content="Rolling Glory - Product List" />
-    <meta
-      name="og:description"
-      content="Discover the latest smartphone models and find the perfect device for your needs at our online store."
-    />
-    <meta name="og:image" content="https://rollingglory.com/images/meta_description.png" />
-    <meta name="og:url" content="{{ window.location.href }}" />
-  </Head>
+  
   <main class="container mx-auto px-4">
     <div class="flex justify-between gap-x-8">
       <div class="w-1/4 lg:block hidden">
